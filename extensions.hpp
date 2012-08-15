@@ -1,3 +1,3 @@
-#include "stream-insertion.hpp"
+#include "stream_insertion.hpp"
 #include "algorithm.hpp"
 #include "stream.hpp"
