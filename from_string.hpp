@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <string>
+#include <stdexcept>
  
 namespace astrant {
 	using std::string;
@@ -13,6 +14,9 @@ namespace astrant {
 		s << x;
 		T y;
 		s >> y;
+		if(!s){
+			throw std::runtime_error("Failed to convert \"" + x + "\" to requested type");
+		}
 		return y;
 	}
 }
