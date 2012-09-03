@@ -48,7 +48,7 @@ std::ostream& output_container(std::ostream& out, T const& rh){
 		++current;
 	}
 	
-	out << "}\n";
+	out << "}";
 	
 	return out;
 }
