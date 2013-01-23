@@ -82,4 +82,14 @@ void remove_element(T& x, U const y){
 	x.erase(std::remove(x.begin(), x.end(), y), x.end());
 }
 
+template <typename Container>
+auto random_element(Container const& c) -> decltype(c[0]){
+	return c[random_value(0lu, c.size())];
+}
+
+template <typename Container>
+auto random_element(Container& c) -> decltype(c[0]){
+	return c[random_value(0lu, c.size())];
+}
+
 }
