@@ -3,6 +3,29 @@
 #include <algorithm>
 
 namespace astrant {
+//! Maps @param value to a range of [0, 1]
+//! Example to map 0-255 to 0-1: normalize(0, 255, 128)
+//! Example to map 1-10 to 0-1: normalize(1, 10, 3)
+template <typename T>
+T normalize(T const min, T const max, T const value){
+	return (value-min)/(max-min);
+}
+
+//! Maps @param value to [@param min, @param max]
+//! Example to map 0-1 to 0-255: normalize(0, 255, 0.5)
+//! Example to map 1-10 to 0-1: normalize(1, 10, 0.4)
+template <typename T>
+T denormalize(T const min, T const max, T const value){
+	return (value * (max-min) + min);
+}
+
+//! Gives a random value [@param min, @param max]
+template <typename T>
+T random_value(T const& min, T const& max){
+	float between_zero_and_one_inclusive = (rand()/float(RAND_MAX));
+	T returnValue = denormalize(float(min), float(max), between_zero_and_one_inclusive);
+	return returnValue;
+}
 
 /*! Sorted insert using std::lower_bound */
 template <typename Container>
