@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <type_traits>
 
 namespace astrant {
 //! Maps @param value to a range of [0, 1]
@@ -11,7 +12,7 @@ T normalize(T const min, T const max, T const value){
 	return (value-min)/(max-min);
 }
 
-//! Maps @param value to [@param min, @param max]
+//! Maps @param value to [@param min , @param max ]
 //! Example to map 0-1 to 0-255: normalize(0, 255, 0.5)
 //! Example to map 1-10 to 0-1: normalize(1, 10, 0.4)
 template <typename T>
@@ -19,7 +20,7 @@ T denormalize(T const min, T const max, T const value){
 	return (value * (max-min) + min);
 }
 
-//! Gives a random value [@param min, @param max]
+//! Gives a random value [@param min , @param max ]
 template <typename T>
 T random_value(T const& min, T const& max){
 	float between_zero_and_one_inclusive = (rand()/float(RAND_MAX));
@@ -66,7 +67,7 @@ struct matches {
 	}
 };
 
-/*! Removes \param y from \param x, given x has the member function erase(iterator)
+/*! Removes \param y from \param x , given x has the member function erase(iterator)
 	@example std::vector<int> x = {1, 2, 3, 4, 5}; std::vector<int> y = {2, 4}; remove_elements(x, y);
 */
 template<typename T, typename U>
@@ -90,6 +91,21 @@ auto random_element(Container const& c) -> decltype(c[0]){
 template <typename Container>
 auto random_element(Container& c) -> decltype(c[0]){
 	return c[random_value(size_t(0), c.size())];
+}
+
+template <typename Container1, typename Container2>
+auto append(Container1& x, Container2 const& y) -> decltype(x) {
+	x.insert(x.end(), y.begin(), y.end());
+	return x;
+}
+
+template <typename T> using rcrr = typename std::remove_const<typename std::remove_reference<T>::type>::type;
+
+template <typename T>
+auto flatten(T const& x) -> rcrr<decltype(*std::begin(x))> {
+	rcrr<decltype(*std::begin(x))> y;
+	for(auto const& e : x){ append(y, e); }
+	return y;
 }
 
 }
