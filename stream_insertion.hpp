@@ -13,7 +13,7 @@ namespace std {
 
 template <typename T, typename U>
 std::ostream& operator<<(std::ostream& out, std::pair<T, U> const& rh){
-	return out << "(" << rh.first << ' ' << rh.second << ")";
+	return out << "{" << rh.first << ", " << rh.second << "}";
 }
 
 template <typename T>
@@ -44,7 +44,7 @@ std::ostream& output_container(std::ostream& out, T const& rh){
 	++current;
 	
 	while(current != end){
-		out << " " << *current;
+		out << ", " << *current;
 		++current;
 	}
 	
