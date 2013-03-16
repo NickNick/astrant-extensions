@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <deque>
 #include <map>
 #include <list>
 #include <set>
@@ -19,6 +20,9 @@ std::ostream& operator<<(std::ostream& out, std::pair<T, U> const& rh){
 
 template <typename T>
 std::ostream& operator<<(std::ostream& out, std::vector<T> const& rh);
+
+template <typename T>
+std::ostream& operator<<(std::ostream& out, std::deque<T> const& rh);
 
 template <typename T, typename U>
 std::ostream& operator<<(std::ostream& out, std::map<T, U> const& rh);
@@ -56,6 +60,11 @@ std::ostream& output_container(std::ostream& out, T const& rh){
 
 template <typename T>
 std::ostream& operator<<(std::ostream& out, std::vector<T> const& rh){
+	return output_container(out, rh);
+}
+
+template <typename T>
+std::ostream& operator<<(std::ostream& out, std::deque<T> const& rh){
 	return output_container(out, rh);
 }
 
