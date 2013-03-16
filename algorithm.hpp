@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdlib>
+#include <map>
 #include <algorithm>
 #include <type_traits>
 
@@ -49,6 +50,11 @@ typename Container::iterator sorted_insert(Container c, typename Container::valu
 template <typename C, typename T>
 bool contains(C const & container, T const & element){
 	return (std::find(container.begin(), container.end(), element) != container.end());
+}
+
+template <typename Key, typename Value>
+bool contains(std::map<Key, Value> const& map, Key const& k){
+	return map.find(k) != map.end();
 }
 
 /*! Functor that returns true when passed element is within the container passed at construction
