@@ -3,7 +3,7 @@
 #include <sstream>
 #include <string>
 #include <stdexcept>
- 
+
 namespace astrant {
 	using std::string;
 	using std::stringstream;
@@ -18,5 +18,10 @@ namespace astrant {
 			throw std::runtime_error("Failed to convert \"" + x + "\" to requested type");
 		}
 		return y;
+	}
+
+	template <>
+	inline std::string from_string<std::string>(std::string const& x){
+		return x;
 	}
 }
