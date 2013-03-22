@@ -63,13 +63,13 @@ bool contains(std::map<Key, Value> const& map, Key const& k){
 template <typename U>
 struct matches {
 	U const& values;
-	
-	matches(U const& values_) 
+
+	matches(U const& values_)
 	: values(values_)
 	{}
-	
+
 	template <typename T>
-	bool operator()(T x){
+	bool operator()(T const& x){
 		return contains(values, x);
 	}
 };
