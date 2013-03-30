@@ -106,6 +106,12 @@ auto append(Container1& x, Container2 const& y) -> decltype(x) {
 	return x;
 }
 
+template <typename Container, typename Element>
+auto append(Container& x, std::initializer_list<Element>&& y) -> decltype(x) {
+	x.insert(x.end(), y.begin(), y.end());
+	return x;
+}
+
 template <typename T> using rcrr = typename std::remove_const<typename std::remove_reference<T>::type>::type;
 
 template <typename T>
