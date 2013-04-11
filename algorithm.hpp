@@ -113,8 +113,8 @@ auto append(std::set<T>& x, Container2 const& y) -> decltype(x) {
 	return x;
 }
 
-template <typename Element, typename Container>
-auto append(Container& x, std::initializer_list<Element>&& y) -> decltype(x) {
+template <typename Container>
+auto append(Container& x, std::initializer_list<typename Container::value_type>&& y) -> decltype(x) {
 	x.insert(x.end(), y.begin(), y.end());
 	return x;
 }
