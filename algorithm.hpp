@@ -101,6 +101,12 @@ auto random_element(Container& c) -> decltype(c[0]){
 	return c[random_value(size_t(0), c.size())];
 }
 
+template <typename Element>
+auto random_element(std::initializer_list<Element>&& c) -> decltype(*c.begin()){
+	auto const it = c.begin() + random_value(size_t(0), c.size());
+	return *it;
+}
+
 template <typename Container1, typename Container2>
 auto append(Container1& x, Container2 const& y) -> decltype(x) {
 	x.insert(x.end(), y.begin(), y.end());
