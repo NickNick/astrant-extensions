@@ -143,8 +143,9 @@ auto flatten(T const& x) -> rcrr<decltype(*std::begin(x))> {
 template <typename Container>
 auto max(Container const& c) -> typename Container::value_type {
 	using Element = typename Container::value_type;
+	assert(!c.empty());
 
-	Element max = std::numeric_limits<Element>::max();
+	Element max = c[0];
 
 	for(auto const& e : c){
 		if (max < e){
