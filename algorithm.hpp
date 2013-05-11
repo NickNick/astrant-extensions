@@ -58,6 +58,11 @@ bool contains(std::map<Key, Value> const& map, Key const& k){
 	return map.find(k) != map.end();
 }
 
+template <typename Value>
+bool contains(std::set<Value> const& c, Value const& x){
+	return c.find(x) != c.end();
+}
+
 /*! Functor that returns true when passed element is within the container passed at construction
  @example See remove_elements
 */
