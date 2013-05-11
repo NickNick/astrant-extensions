@@ -5,6 +5,7 @@
 #include <map>
 #include <list>
 #include <set>
+#include <array>
 
 #include <sstream>
 #include <iomanip>
@@ -72,7 +73,12 @@ template <typename T>
 std::ostream& operator<<(std::ostream& out, std::set<T> const& rh){
 	return output_container(out, rh);
 }
-		
+
+template <typename T, size_t size>
+std::ostream& operator<<(std::ostream& out, std::array<T, size> const& rh){
+	return output_container(out, rh);
+}
+
 }
 
 
