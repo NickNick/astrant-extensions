@@ -176,4 +176,45 @@ T product(std::array<T, size> const& x){
 	return return_value;
 }
 
+template <typename T>
+struct Range {
+        Range(T* _begin, size_t const size)
+        : begin_(_begin)
+        , end_(_begin + size)
+        {}
+
+        T* begin() const { return begin_; }
+        T* end() const { return end_; }
+        size_t size() const { return end() - begin(); }
+
+        T* begin_;
+        T* end_;
+
+        typedef T value_type;
+};
+
+template <typename T>
+Range<T> make_range(T* begin, size_t const size){
+        return Range<T>(begin, size);
+}
+
+template <typename Iterator>
+struct IteratorPair {
+        IteratorPair(Iterator begin_, Iterator end_)
+        : _begin(begin_)
+        , _end(end_)
+        {}
+
+        Iterator begin() const {
+                return _begin;
+        }
+
+        Iterator end() const {
+                return _end;
+        }   
+            
+        Iterator _begin;
+        Iterator _end;
+};
+
 }
