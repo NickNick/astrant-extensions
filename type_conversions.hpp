@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 #include "to_string.hpp"
+#include "type_strings.hpp"
 
 //TODO: namespace astrant {
 
