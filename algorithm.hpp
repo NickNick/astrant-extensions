@@ -84,16 +84,16 @@ struct matches {
 /*! Removes \param y from \param x , given x has the member function erase(iterator)
 	@example std::vector<int> x = {1, 2, 3, 4, 5}; std::vector<int> y = {2, 4}; remove_elements(x, y);
 */
-template<typename T, typename U>
-void remove_elements(T& x, U const y){
-	x.erase(std::remove_if(x.begin(), x.end(), matches<U>(y)), x.end());
+template<typename Container, typename Elements>
+void remove_elements(Container& x, Elements const y){
+	x.erase(std::remove_if(x.begin(), x.end(), matches<Elements>(y)), x.end());
 }
 
-/* Remove \param y from \param x, given x has the member function erase(iterator)
+/*! Removes \param y from \param x, given x has the member function erase(iterator)
 	@example std::vector<int> x = {1, 2, 3, 4, 5}; remove_element(x, 3);
 */
-template <typename T, typename U>
-void remove_element(T& x, U const y){
+template <typename Container, typename Element>
+void remove_element(Container& x, Element const y){
 	x.erase(std::remove(x.begin(), x.end(), y), x.end());
 }
 
