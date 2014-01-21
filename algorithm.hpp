@@ -32,6 +32,14 @@ T random_value(T const& min, T const& max){
 	return returnValue;
 }
 
+//! Clamps @param x in [@param min , @param max ]
+template <typename T>
+T clamp(T const & x, T const & min, T const & max){
+	if(x < min) return min;
+	if(x > max) return max;
+	return x;
+}
+
 /*! Sorted insert using std::lower_bound */
 template <typename Container>
 typename Container::iterator sorted_insert(Container & c, typename Container::value_type x){
@@ -95,6 +103,14 @@ void remove_elements(Container& x, Elements const y){
 template <typename Container, typename Element>
 void remove_element(Container& x, Element const y){
 	x.erase(std::remove(x.begin(), x.end(), y), x.end());
+}
+
+/*! Removes elements from \param x satisfying the predicate \param f
+	@example std::vector<int> x = {1, 2, 3, 4, 5}; remove_elements_if(x, &is_even);
+*/
+template<typename Container, typename F>
+void remove_elements_if(Container& x, F const & f){
+	x.erase(std::remove_if(x.begin(), x.end(), f), x.end());
 }
 
 template <typename Container>
