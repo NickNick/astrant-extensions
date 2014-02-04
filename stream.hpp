@@ -9,5 +9,8 @@
 #define ACOUT COUT
 #define ACERR CERR
 
+#define ASDOUT std::cout << INFORMATION << ": "
+#define ASDERR std::cerr << INFORMATION << ": "
+
 #define VCOUT if(verbose) COUT
 #define VCERR if(verbose) CERR
