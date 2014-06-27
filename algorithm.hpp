@@ -131,7 +131,7 @@ auto random_element(std::initializer_list<Element>&& c) -> decltype(*c.begin()){
 
 template <typename Container1, typename Container2>
 auto append(Container1& x, Container2 const& y) -> decltype(x) {
-	x.insert(x.end(), y.begin(), y.end());
+	x.insert(std::end(x), std::begin(y), std::end(y));
 	return x;
 }
 
