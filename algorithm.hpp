@@ -32,14 +32,6 @@ T random_value(T const& min, T const& max){
 	return returnValue;
 }
 
-//! Clamps @param x in [@param min , @param max ]
-template <typename T>
-T clamp(T const & x, T const & min, T const & max){
-	if(x < min) return min;
-	if(x > max) return max;
-	return x;
-}
-
 /*! Sorted insert using std::lower_bound */
 template <typename Container>
 typename Container::iterator sorted_insert(Container & c, typename Container::value_type x){
