@@ -13,6 +13,6 @@ set_target_properties(astrant-extensions PROPERTIES LINKER_LANGUAGE CXX)
 
 find_package(wubwubcmake)
 if(wubwubcmake_DIR)
-	include(sane_install)
+	include(wubwubcmake/sane_install)
 	sane_install(TARGETS astrant-extensions HEADERS ${headers})
 endif()
