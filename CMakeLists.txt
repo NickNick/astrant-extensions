@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-project(astrant)
+project(astrant-extensions)
 
 add_library(astrant-extensions SHARED)
 target_include_directories(astrant-extensions INTERFACE "..")
