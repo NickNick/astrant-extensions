@@ -97,6 +97,11 @@ void remove_element(Container& x, Element const y){
 	x.erase(std::remove(x.begin(), x.end(), y), x.end());
 }
 
+template <typename Key, typename Value>
+void remove_element(std::map<Key, Value>& x, Key const y){
+	x.erase(y);
+}
+
 /*! Removes elements from \param x satisfying the predicate \param f
 	@example std::vector<int> x = {1, 2, 3, 4, 5}; remove_elements_if(x, &is_even);
 */
