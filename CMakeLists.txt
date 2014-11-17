@@ -5,10 +5,7 @@ project(astrant-extensions)
 file(GLOB headers "*.hpp")
 file(GLOB sources "*.cpp")
 add_library(astrant-extensions SHARED ${sources} ${headers})
-target_include_directories(astrant-extensions
-	INTERFACE
-		$<BUILD_INTERFACE:"..">
-)
+target_include_directories(astrant-extensions INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..> )
 set_target_properties(astrant-extensions PROPERTIES LINKER_LANGUAGE CXX)
 
 find_package(wubwubcmake 1)
