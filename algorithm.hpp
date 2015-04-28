@@ -198,9 +198,9 @@ T product(std::array<T, size> const& x){
 
 template <typename T>
 struct Range {
-        Range(T* _begin, size_t const size)
+        Range(T* _begin, size_t const size_)
         : begin_(_begin)
-        , end_(_begin + size)
+        , end_(_begin + size_)
         {}
 
         T* begin() const { return begin_; }
