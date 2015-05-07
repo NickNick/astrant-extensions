@@ -47,7 +47,7 @@ typename Container::iterator sorted_insert(Container & c, typename Container::va
 }
 
 /*! Return if \param container contains \param element
-	@example if(contains(x, 5)){}
+	For example: if(contains(x, 5)){}
 */
 template <typename C, typename T>
 bool contains(C const & container, T const & element){
@@ -65,7 +65,7 @@ bool contains(std::set<Value> const& c, Value const& x){
 }
 
 /*! Functor that returns true when passed element is within the container passed at construction
- @example See remove_elements
+	See remove_elements
 */
 template <typename U>
 struct matches {
@@ -82,15 +82,15 @@ struct matches {
 };
 
 /*! Removes \param y from \param x , given x has the member function erase(iterator)
-	@example std::vector<int> x = {1, 2, 3, 4, 5}; std::vector<int> y = {2, 4}; remove_elements(x, y);
+	std::vector<int> x = {1, 2, 3, 4, 5}; std::vector<int> y = {2, 4}; remove_elements(x, y);
 */
 template<typename Container, typename Elements>
 void remove_elements(Container& x, Elements const y){
 	x.erase(std::remove_if(x.begin(), x.end(), matches<Elements>(y)), x.end());
 }
 
-/*! Removes \param y from \param x, given x has the member function erase(iterator)
-	@example std::vector<int> x = {1, 2, 3, 4, 5}; remove_element(x, 3);
+/*! Removes \param y from \param x , given x has the member function erase(iterator)
+	std::vector<int> x = {1, 2, 3, 4, 5}; remove_element(x, 3);
 */
 template <typename Container, typename Element>
 void remove_element(Container& x, Element const y){
@@ -98,7 +98,7 @@ void remove_element(Container& x, Element const y){
 }
 
 /*! Removes elements from \param x satisfying the predicate \param f
-	@example std::vector<int> x = {1, 2, 3, 4, 5}; remove_elements_if(x, &is_even);
+	std::vector<int> x = {1, 2, 3, 4, 5}; remove_elements_if(x, &is_even);
 */
 template<typename Container, typename F>
 void remove_elements_if(Container& x, F const & f){
