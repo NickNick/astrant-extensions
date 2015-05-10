@@ -21,12 +21,3 @@ namespace astrant {
 #define ASDOUT std::cout << ASTRANT_STREAM_CURRENT_PLACE_INFORMATION  << ": "
 #define ACERR  std::cerr << ASTRANT_STREAM_CURRENT_PLACE_INFORMATION  << "\n"
 #define ASDERR std::cerr << ASTRANT_STREAM_CURRENT_PLACE_INFORMATION  << ": "
-
-//! @{
-//! @deprecated
-#define COUT ACOUT
-#define CERR ACERR
-#define INFORMATION ASTRANT_STRING_CURRENT_PLACE_INFORMATION
-#define VCOUT if(verbose) COUT
-#define VCERR if(verbose) CERR
-//! @}
