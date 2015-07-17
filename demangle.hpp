@@ -2,6 +2,7 @@
 
 #include <cxxabi.h>
 #include <stdexcept>
+#include <cassert>
 
 inline std::string demangle(std::string const name){
 	int st;
