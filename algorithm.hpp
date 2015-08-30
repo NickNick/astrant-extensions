@@ -54,14 +54,19 @@ bool contains(C const & container, T const & element){
 	return (std::find(container.begin(), container.end(), element) != container.end());
 }
 
+template <typename Container, typename Value>
+bool contains_with_find_not_end(Container const& c, Value const& v){
+	return c.find(v) != c.end();
+}
+
 template <typename Key, typename Value>
 bool contains(std::map<Key, Value> const& map, Key const& k){
-	return map.find(k) != map.end();
+	return contains_with_find_not_end(map, k);
 }
 
 template <typename Value>
 bool contains(std::set<Value> const& c, Value const& x){
-	return c.find(x) != c.end();
+	return contains_with_find_not_end(c, x);
 }
 
 /*! Functor that returns true when passed element is within the container passed at construction
