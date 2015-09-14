@@ -36,14 +36,14 @@ std::ostream& operator<<(std::ostream& out, std::set<T> const& rh);
 /*! Helper function, outputs a container to the given stream like so {foo bar baz} */
 template <typename T>
 std::ostream& output_container(std::ostream& out, T const& rh){
-	typename T::const_iterator begin = rh.begin();
-	typename T::const_iterator end = rh.end();
+	auto begin = rh.begin();
+	auto end = rh.end();
 	
 	if(begin == end){
 		return out << "{}";
 	}
 	
-	typename T::const_iterator& current = begin;
+	auto& current = begin;
 	out << "{";
 	out << *current;
 	++current;
