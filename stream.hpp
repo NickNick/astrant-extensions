@@ -21,3 +21,5 @@ namespace astrant {
 #define ASDOUT std::cout << ASTRANT_STREAM_CURRENT_PLACE_INFORMATION  << ": "
 #define ACERR  std::cerr << ASTRANT_STREAM_CURRENT_PLACE_INFORMATION  << "\n"
 #define ASDERR std::cerr << ASTRANT_STREAM_CURRENT_PLACE_INFORMATION  << ": "
+
+#define AVAROUT(expr) ASDOUT << #expr << ": " << expr << "\n"
