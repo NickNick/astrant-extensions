@@ -1,15 +1,13 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0)
 
 project(astrant-extensions)
 
-file(GLOB headers "*.hpp")
-file(GLOB sources "*.cpp")
-add_library(astrant-extensions SHARED ${sources} ${headers})
+add_library(astrant-extensions INTERFACE)
 target_include_directories(astrant-extensions INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..> )
-set_target_properties(astrant-extensions PROPERTIES LINKER_LANGUAGE CXX)
 
 find_package(wubwubcmake 1)
 if(wubwubcmake_DIR)
 	include(wubwubcmake/sane_install)
+	file(GLOB headers "*.hpp")
 	sane_install(TARGETS astrant-extensions HEADERS ${headers})
 endif()
