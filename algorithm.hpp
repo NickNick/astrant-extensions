@@ -206,6 +206,90 @@ T product(std::array<T, size> const& x){
 	return return_value;
 }
 
+/*! Merge a map.
+ * This function can be used on multi_maps, boost ptrees or other kinds of
+ * keyvalue pairs where the key does not have to be unique. The given merger
+ * function is called with three parameters: the key (of type Map::key_type),
+ * the value to merge into and the value to merge from (both Map::mapped_type).
+ * A fully merged map is returned. This only merges the top layer; there is
+ * recursive_merge_inplace for a recursive merge.
+ */
+template <typename Map, typename Merger>
+void merge_inplace(Map &map, Merger const &merger) {
+	std::map<const typename Map::key_type, int> keys;
+	for(auto const &entry : map) {
+		keys[entry.first] += 1;
+	}
+
+	for(auto &key_it : keys) {
+		auto key = key_it.first;
+		auto duplicates = key_it.second;
+		while(duplicates > 1) {
+			auto key_finder = [&](typename Map::value_type const &t) { return t.first == key; };
+			auto it1 = std::find_if(map.begin(), map.end(), key_finder);
+			auto it2 = std::find_if(std::next(it1), map.end(), key_finder);
+			if(it2 == map.end()) {
+				// we were expecting another key with this value
+				throw std::runtime_error("Map changed while merging it");
+			}
+			merger(key, it1->second, it2->second);
+			map.erase(it2);
+			--duplicates;
+		}
+	}
+}
+
+template <typename Map, typename Merger>
+void recursive_merge_inplace(Map &map, Merger const &merger);
+
+namespace detail {
+
+template <typename...>
+struct voider { using type = void; };
+
+template <typename... T>
+using void_t = typename voider<T...>::type;
+
+template <typename T, typename U = void>
+struct has_key_type : std::false_type {};
+
+template <typename T>
+struct has_key_type<T, void_t<typename T::key_type>> : std::true_type {};
+
+template <typename Map, typename Merger, typename std::enable_if<has_key_type<typename Map::mapped_type>::value, int>::type = 0>
+void _recursive_merge_inplace(Map &map, Merger const &merger) {
+	// Map::mapped_type::key_type exists, so map values are mergeable
+	for(auto &it : map) {
+		recursive_merge_inplace(it->second, merger);
+	}
+}
+
+template <typename Map, typename Merger, typename std::enable_if<!has_key_type<typename Map::mapped_type>::value, int>::type = 0>
+void _recursive_merge_inplace(Map &map, Merger const &merger) {
+	// Map::mapped_type::key_type does not exist, so the merge stops here
+}
+
+template <typename Map, typename Merger, typename std::enable_if<!has_key_type<typename Map::data_type>::value, int>::type = 0>
+void _recursive_merge_inplace(Map &map, Merger const &merger) {
+	// Map::data_type::key_type exists, so map values are mergeable (probably boost::ptree)
+	for(auto &it : map) {
+		recursive_merge_inplace(it.second, merger);
+	}
+}
+
+}
+
+/*! Recursively merge a map.
+ * See merge_inplace, but recursively called on the children of the map until
+ * the children are immergeable or there are no children.
+ */
+template <typename Map, typename Merger>
+void recursive_merge_inplace(Map &map, Merger const &merger) {
+	merge_inplace(map, merger);
+	detail::_recursive_merge_inplace(map, merger);
+}
+
+
 template <typename T>
 struct Range {
         Range(T* _begin, size_t const size_)
