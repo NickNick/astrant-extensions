@@ -265,7 +265,7 @@ void _recursive_merge_inplace(Map &map, Merger const &merger) {
 }
 
 template <typename Map, typename Merger, typename std::enable_if<!has_key_type<typename Map::mapped_type>::value, int>::type = 0>
-void _recursive_merge_inplace(Map &map, Merger const &merger) {
+void _recursive_merge_inplace(Map &, Merger const &) {
 	// Map::mapped_type::key_type does not exist, so the merge stops here
 }
 
