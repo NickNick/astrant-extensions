@@ -1,5 +1,6 @@
 #include <catch.hpp>
-#include <astrant-extensions/algorithm.hpp>
+#include <astrant-extensions/merge_inplace.hpp>
+#include <astrant-extensions/recursive_merge_inplace.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/info_parser.hpp>
 
