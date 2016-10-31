@@ -1,6 +1,7 @@
 #pragma once
 
 #include "append.hpp"
+#include "add.hpp"
 #include "contains.hpp"
 #include "denormalize.hpp"
 #include "flatten.hpp"
