@@ -6,6 +6,8 @@ namespace astrant {
 
 template <typename Container1, typename Container2>
 auto append(Container1& x, Container2 const& y) -> decltype(x) {
+	using std::begin;
+	using std::end;
 	x.insert(end(x), begin(y), end(y));
 	return x;
 }
